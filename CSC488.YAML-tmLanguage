@@ -1,0 +1,52 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+name: CSC488 Language
+scopeName: source.488
+fileTypes: ['488']
+uuid: 5f42d0f2-1948-4073-8636-cfa4584d451e
+
+patterns:
+- name: keyword.other.begin.488
+  match: (begin)
+
+- name: keyword.other.end.488
+  match: (end)
+
+- name: keyword.control.488
+  match: (do|while|when|return|skip|yields|loop|exit|function|procedure)
+
+- name: keyword.operator.488
+  match: (if|else|then)
+
+- name: support.function.488
+  match: (get|put)
+
+- name: storage.type.488
+  match: (integer|boolean)
+
+- name: constant.language.true.488
+  match: (true)
+
+- name: constant.language.false.488
+  match: (false)
+
+- name: support.quoted.double.488
+  begin: (")
+  end: (")
+  beginCaptures:
+      '0': { name: punctuation.definition.string.begin.js }
+  endCaptures:
+      '0': { name: punctuation.definition.string.end.js }
+
+- name: variable.complex.488
+  contentName: support.other.488
+  begin: (.+)\s*(\<\=)\s*(.+)
+  beginCaptures:
+    '2': { name: keyword.other.488 }
+  end: \n
+  patterns:
+  - include: $self
+  - name: support.other.488
+    match: .
+
+- name: comment.line.percentage.488
+  match: (%).*$\n?
